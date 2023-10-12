@@ -5,9 +5,12 @@ import {
   Range,
 } from "vscode";
 import type { JSON5SyntaxError } from "vs-json5/@types";
-import Ajv from "ajv";
+import Ajv, { type ErrorObject } from "ajv";
 import jju from "jju";
-import { NPM_PACKAGE_FILE_NAME } from "vs-json5/@shared/constant";
+import {
+  NPM_PACKAGE_FILE_NAME,
+  VALID_VALUES_TIP_START,
+} from "vs-json5/@shared/constant";
 import { packageSchema } from "vs-json5/schema/npm.package";
 import { parseTree, findNodeAtLocation } from "json5-parser";
 import { getDiagnosticByLintError } from "vs-json5/@shared/diagnostic";
@@ -17,6 +20,19 @@ const ajv = new Ajv({
 });
 
 const jsonSchemaValidate = ajv.compile(packageSchema);
+
+const formatDiagnosticMsg = (
+  error: ErrorObject<string, { allowedValues?: string[] }>
+) => {
+  const { message, params = {} } = error;
+  const { allowedValues = [] } = params;
+  const allowedValuesMsg =
+    "allowedValues" in params
+      ? `${VALID_VALUES_TIP_START}: ${allowedValues.join(" , ")}`
+      : "";
+
+  return [message, allowedValuesMsg].join("; ");
+};
 
 export const json5Lint = (document: TextDocument): Diagnostic[] | void => {
   try {
@@ -46,7 +62,7 @@ export const json5Lint = (document: TextDocument): Diagnostic[] | void => {
 
       return {
         severity: DiagnosticSeverity.Warning,
-        message: e.message!,
+        message: formatDiagnosticMsg(e),
         range: new Range(
           document.positionAt(node?.offset!),
           document.positionAt(node?.offset! + node?.length!)

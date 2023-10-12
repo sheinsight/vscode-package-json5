@@ -6,6 +6,9 @@ export const NPM_PACKAGE_FILE_NAME = "package.json5" as const;
 
 export const USER_AGENT = "Visual Studio Code" as const;
 
+export const VALID_VALUES_TIP_START =
+  "Value not accepted. Valid values" as const;
+
 export const MOST_DEPENDE_ON = [
   "lodash",
   "async",
