@@ -1,0 +1,115 @@
+{
+  "name": "package-json5",
+  "displayName": "Package JSON5",
+  "description": "A plugin that supports writing JSON5 file extension",
+  "version": "0.0.1",
+  "publisher": "",
+  "icon": "",
+  "repository": {},
+  "keywords": [
+    "vscode",
+    "extension",
+    "json5",
+    "json5 code formatter",
+    "json5 syntaxes",
+    "package"
+  ],
+  "engines": {
+    "vscode": "0.14.x"
+  },
+  "scripts": {
+    "build": "esno ./scripts/build.ts",
+    "dev": "esno ./scripts/dev.ts",
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
+  },
+  "categories": [
+    "Other",
+    "Formatters",
+    "Programming Languages"
+  ],
+  "main": "./dist/index.js",
+  "activationEvents": [
+    "onLanguage:json5",
+    "onLanguage:json",
+    "onTaskType:pnpm",
+    "workspaceContains:package.json5"
+  ],
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "json5": "^2.2.3",
+    "jju": "^1.4.0",
+    "json-schema": "^0.4.0",
+    "request-light": "^0.7.0",
+    "which": "^4.0.0",
+    "json5-parser": "^0.0.2",
+    "find-yarn-workspace-root": "^2.0.0",
+    "which-pm": "^2.1.1",
+    "find-up": "^6.3.0",
+    "minimatch": "^9.0.3",
+    "vscode-uri": "^3.0.8",
+    "strip-comments-strings": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@vscode/test-electron": "^2.3.4",
+    "@types/vscode": "^1.14.0",
+    "typescript": "^5.2.2",
+    "@vscode/vsce": "^2.21.0",
+    "esbuild": "^0.19.4",
+    "@types/json5": "^2.2.0",
+    "@types/node": "18",
+    "@types/jju": "^1.4.3",
+    "@types/json-schema": "^7.0.13",
+    "@types/which": "^3.0.0",
+    "esno": "^0.17.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "json5",
+        "aliases": [
+          "JSON5",
+          "json5"
+        ],
+        "extensions": [
+          ".json5"
+        ],
+        "configuration": "./syntaxes/language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "json5",
+        "scopeName": "source.json5",
+        "path": "./syntaxes/json5.tmLanguage.json"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "vs.json5.jsonToJson5",
+          "when": "resourceLangId == json",
+          "title": "JSON TO JSON5"
+        },
+        {
+          "command": "vs.json5.formatter",
+          "when": "resourceLangId == json5",
+          "title": "JSON5 Formatter"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vs.json5.formatter",
+        "title": "JSON5 Formatter"
+      },
+      {
+        "command": "vs.json5.jsonToJson5",
+        "title": "JSON TO JSON5"
+      }
+    ]
+  }
+}
