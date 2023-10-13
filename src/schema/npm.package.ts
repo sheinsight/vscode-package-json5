@@ -1,5 +1,9 @@
 import type { JSONSchema7 } from "json-schema";
 
+/**
+ * @link https://json.schemastore.org/package
+ */
+
 export const packageSchema: JSONSchema7 = {
   title: "JSON schema for NPM package.json files",
   definitions: {

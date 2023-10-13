@@ -29,6 +29,7 @@
     "Programming Languages"
   ],
   "main": "./dist/index.js",
+  "type": "commonjs",
   "activationEvents": [
     "onLanguage:json5",
     "onLanguage:json",
@@ -36,10 +37,10 @@
     "workspaceContains:package.json5"
   ],
   "dependencies": {
-    "ajv": "^8.12.0",
     "json5": "^2.2.3",
     "jju": "^1.4.0",
     "json-schema": "^0.4.0",
+    "json-schema-library": "^9.1.2",
     "request-light": "^0.7.0",
     "which": "^4.0.0",
     "json5-parser": "^0.0.2",
@@ -48,7 +49,8 @@
     "find-up": "^6.3.0",
     "minimatch": "^9.0.3",
     "vscode-uri": "^3.0.8",
-    "strip-comments-strings": "^1.2.0"
+    "strip-comments-strings": "^1.2.0",
+    "vscode-languageclient": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.51.0",
@@ -78,6 +80,12 @@
           ".json5"
         ],
         "configuration": "./syntaxes/language-configuration.json"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "package.json5",
+        "url": "https://json.schemastore.org/package"
       }
     ],
     "grammars": [
