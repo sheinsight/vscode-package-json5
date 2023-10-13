@@ -15,8 +15,13 @@ export const DOCUMENT_SELECTOR = {
   pattern: "**/package.json5",
 } as const;
 
-// : prompt enum values   ,: prompt package.json key
-export const COMPLETION_ITEM_TRIGGER_CHARACTERS = [":", ","] as const;
+// : prompt enum values   ,\n or \n: prompt package.json key
+export const COMPLETION_ITEM_TRIGGER_CHARACTERS = [
+  ":",
+  ",",
+  ",\n",
+  "\n",
+] as const;
 
 export const MOST_DEPENDE_ON = [
   "lodash",
