@@ -1,6 +1,6 @@
 import type { ExtensionContext } from "vscode";
 import { languages, commands } from "vscode";
-import { addJSON5Validation } from "vs-json5/validation/validate";
+import { addJSON5Validation, JSON5HoverProvider } from "vs-json5/validation";
 import { LANGUAGE_ID, REGISTER_CMD } from "vs-json5/@shared/constant";
 import {
   JSON5EditProvider,
@@ -34,6 +34,11 @@ export const activate = (ctx: ExtensionContext) => {
 
   ctx.subscriptions.push(
     commands.registerCommand(REGISTER_CMD.JSON_TO_JSON5, JSONToJSON5CmdHander)
+  );
+
+  // hover json5 key and show field information
+  ctx.subscriptions.push(
+    languages.registerHoverProvider(LANGUAGE_ID, new JSON5HoverProvider())
   );
 };
 

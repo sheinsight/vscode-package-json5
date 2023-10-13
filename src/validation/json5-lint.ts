@@ -4,22 +4,16 @@ import {
   DiagnosticSeverity,
   Range,
 } from "vscode";
-import type { JSON5SyntaxError } from "vs-json5/@types";
-import { Draft07, type JsonError } from "json-schema-library";
+import type { JSON5SyntaxError, Pointer } from "vs-json5/@types";
+import { Draft07 } from "json-schema-library";
 import jju from "jju";
 import { NPM_PACKAGE_FILE_NAME } from "vs-json5/@shared/constant";
+import { resolvePoiniterToPath } from "vs-json5/@shared";
 import { packageSchema } from "vs-json5/schema/npm.package";
 import { parseTree, findNodeAtLocation } from "json5-parser";
 import { getDiagnosticByLintError } from "vs-json5/@shared/diagnostic";
 
 const jsonSchema = new Draft07(packageSchema);
-
-type Pointer = `#/${string}`;
-
-const resolvePoiniterToPath = (pointer: Pointer) => {
-  const path = pointer.replace("#/", "");
-  return path;
-};
 
 export const json5Lint = (document: TextDocument): Diagnostic[] | void => {
   try {

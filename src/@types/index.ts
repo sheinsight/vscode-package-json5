@@ -12,3 +12,5 @@ export interface CommentSpecifier {
   whitespace: string;
   before?: string;
 }
+
+export type Pointer = `#/${string}`;
