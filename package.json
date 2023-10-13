@@ -15,7 +15,7 @@
     "package"
   ],
   "engines": {
-    "vscode": "0.14.x"
+    "vscode": "^1.73.x"
   },
   "scripts": {
     "build": "esno ./scripts/build.ts",
@@ -57,7 +57,7 @@
     "@typescript-eslint/parser": "^5.57.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@vscode/test-electron": "^2.3.4",
-    "@types/vscode": "^1.14.0",
+    "@types/vscode": "^1.73.1",
     "typescript": "^5.2.2",
     "@vscode/vsce": "^2.21.0",
     "esbuild": "^0.19.4",
@@ -80,12 +80,6 @@
           ".json5"
         ],
         "configuration": "./syntaxes/language-configuration.json"
-      }
-    ],
-    "jsonValidation": [
-      {
-        "fileMatch": "package.json5",
-        "url": "https://json.schemastore.org/package"
       }
     ],
     "grammars": [

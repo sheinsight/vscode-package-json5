@@ -62,7 +62,7 @@ devDependencies:
     specifier: '18'
     version: 18.18.4
   '@types/vscode':
-    specifier: ^1.14.0
+    specifier: ^1.73.1
     version: 1.83.0
   '@types/which':
     specifier: ^3.0.0
