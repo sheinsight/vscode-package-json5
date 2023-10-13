@@ -1,7 +1,16 @@
 import type { ExtensionContext } from "vscode";
 import { languages, commands } from "vscode";
-import { addJSON5Validation, JSON5HoverProvider } from "vs-json5/validation";
-import { LANGUAGE_ID, REGISTER_CMD } from "vs-json5/@shared/constant";
+import {
+  addJSON5Validation,
+  JSON5HoverProvider,
+  JSON5CompletionItemProvider,
+} from "vs-json5/validation";
+import {
+  LANGUAGE_ID,
+  REGISTER_CMD,
+  DOCUMENT_SELECTOR,
+  COMPLETION_ITEM_TRIGGER_CHARACTERS,
+} from "vs-json5/@shared/constant";
 import {
   JSON5EditProvider,
   JSON5FormatterCmdHander,
@@ -18,7 +27,7 @@ export const activate = (ctx: ExtensionContext) => {
 
   // json5 code formatter
   languages.registerDocumentFormattingEditProvider(
-    { scheme: "file", language: LANGUAGE_ID },
+    DOCUMENT_SELECTOR,
     new JSON5EditProvider()
   );
 
@@ -39,6 +48,15 @@ export const activate = (ctx: ExtensionContext) => {
   // hover json5 key and show field information
   ctx.subscriptions.push(
     languages.registerHoverProvider(LANGUAGE_ID, new JSON5HoverProvider())
+  );
+
+  // enum optional completion and npm package key completion
+  ctx.subscriptions.push(
+    languages.registerCompletionItemProvider(
+      DOCUMENT_SELECTOR,
+      new JSON5CompletionItemProvider(),
+      ...COMPLETION_ITEM_TRIGGER_CHARACTERS
+    )
   );
 };
 

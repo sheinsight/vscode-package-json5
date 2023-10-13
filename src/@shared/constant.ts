@@ -9,6 +9,15 @@ export const USER_AGENT = "Visual Studio Code" as const;
 export const VALID_VALUES_TIP_START =
   "Value not accepted. Valid values" as const;
 
+export const DOCUMENT_SELECTOR = {
+  scheme: "file",
+  language: LANGUAGE_ID,
+  pattern: "**/package.json5",
+} as const;
+
+// : prompt enum values   ,: prompt package.json key
+export const COMPLETION_ITEM_TRIGGER_CHARACTERS = [":", ","] as const;
+
 export const MOST_DEPENDE_ON = [
   "lodash",
   "async",
