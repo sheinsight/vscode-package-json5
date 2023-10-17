@@ -15,6 +15,7 @@ import {
   JSON5EditProvider,
   JSON5FormatterCmdHander,
   JSONToJSON5CmdHander,
+  addFormatOnSave,
 } from "vs-json5/formatter";
 import { npmActivate } from "vs-json5/npm";
 
@@ -58,6 +59,9 @@ export const activate = (ctx: ExtensionContext) => {
       ...COMPLETION_ITEM_TRIGGER_CHARACTERS
     )
   );
+
+  // formatOnSave
+  ctx.subscriptions.push(addFormatOnSave());
 };
 
 export const deactivate = () => {};

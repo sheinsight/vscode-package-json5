@@ -15,7 +15,7 @@ import { getDiagnosticByLintError } from "vs-json5/@shared/diagnostic";
 
 const jsonSchema = new Draft07(packageSchema);
 
-export const json5Lint = (document: TextDocument): Diagnostic[] | void => {
+export const json5Lint = (document: TextDocument): Diagnostic[] => {
   try {
     const text = document.getText();
     // continue if json5 parse noraml
@@ -23,7 +23,7 @@ export const json5Lint = (document: TextDocument): Diagnostic[] | void => {
 
     // npm package json schema validate only form package.json5 file
     if (!document.fileName.endsWith(`/${NPM_PACKAGE_FILE_NAME}`)) {
-      return;
+      return [];
     }
 
     //  validate json schema

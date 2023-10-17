@@ -4,9 +4,16 @@ import {
   Range,
   TextDocument,
   TextEdit,
+  workspace,
+  Disposable,
 } from "vscode";
-
 import { JSON5Format } from "./json5-fomat";
+import { json5Lint } from "vs-json5/validation";
+import { JSON5FormatterCmdHander } from "./command-handler";
+
+const NOOP = () => {};
+
+const EMPTY_DISPOSABLE: Disposable = { dispose: NOOP };
 
 export class JSON5EditProvider
   implements
@@ -67,6 +74,28 @@ export class JSON5EditProvider
     return this.provideEdits(document);
   };
 }
+
+export const addFormatOnSave = () => {
+  const enabled = workspace
+    .getConfiguration("editor")
+    .get("formatOnSave") as boolean;
+
+  if (!enabled) {
+    return EMPTY_DISPOSABLE;
+  }
+  const disposable = workspace.onWillSaveTextDocument((e) => {
+    const { document } = e;
+    const errors = json5Lint(document);
+    // lint normal
+    if (errors.length > 0) {
+      return;
+    }
+
+    JSON5FormatterCmdHander();
+  });
+
+  return disposable;
+};
 
 export * from "./json5-fomat";
 
