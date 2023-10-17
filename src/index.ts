@@ -11,6 +11,7 @@ import {
   DOCUMENT_SELECTOR,
   COMPLETION_ITEM_TRIGGER_CHARACTERS,
 } from "vs-json5/@shared/constant";
+import { getUserSettings } from "vs-json5/@shared";
 import {
   JSON5EditProvider,
   JSON5FormatterCmdHander,
@@ -20,8 +21,14 @@ import {
 import { npmActivate } from "vs-json5/npm";
 
 export const activate = (ctx: ExtensionContext) => {
-  // json5 validate
-  ctx.subscriptions.push(addJSON5Validation());
+  const userSettings = getUserSettings();
+
+  const { validate } = userSettings;
+
+  if (validate.enable) {
+    // json5 validate
+    ctx.subscriptions.push(addJSON5Validation());
+  }
 
   // vscode npm extension active
   npmActivate(ctx);

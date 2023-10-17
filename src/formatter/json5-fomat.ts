@@ -1,10 +1,10 @@
 import { extractComments, insertComments } from "./comments-parser";
 import JSON5 from "json5";
-import { getUserConfig } from "vs-json5/@shared";
+import { getUserSettings } from "vs-json5/@shared";
 
 export const JSON5Format = (text: string) => {
   const { comments = [], text: _text } = extractComments(text);
-  const userSettings = getUserConfig();
+  const userSettings = getUserSettings();
 
   const {
     format: { singleQuote, space },

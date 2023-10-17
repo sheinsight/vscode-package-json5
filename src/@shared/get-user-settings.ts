@@ -14,7 +14,7 @@ const DEFAUL_SETTINGS: JOSNUserSettings = {
   },
 };
 
-export function getUserConfig(uri?: Uri): JOSNUserSettings {
+export function getUserSettings(uri?: Uri): JOSNUserSettings {
   const config = workspace.getConfiguration(
     LANGUAGE_ID,
     uri
