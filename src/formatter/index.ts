@@ -1,7 +1,6 @@
 import {
   DocumentFormattingEditProvider,
   DocumentRangeFormattingEditProvider,
-  //   FormattingOptions,
   Range,
   TextDocument,
   TextEdit,

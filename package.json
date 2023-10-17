@@ -112,6 +112,38 @@
         "command": "vs.json5.jsonToJson5",
         "title": "JSON TO JSON5"
       }
-    ]
+    ],
+    "configuration": {
+      "id": "json5",
+      "order": 0,
+      "type": "object",
+      "title": "JSON5",
+      "properties": {
+        "json5.validate.enable": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "enable json5 validate"
+        },
+        "json5.format.enable": {
+          "type": "boolean",
+          "scope": "window",
+          "default": true,
+          "description": "enable json5 format"
+        },
+        "json5.format.singleQuote": {
+          "type": "boolean",
+          "scope": "window",
+          "default": false,
+          "description": "the formatted json5 file is in single quotes"
+        },
+        "json5.format.space": {
+          "type": "number",
+          "scope": "window",
+          "default": 2,
+          "description": "format json5 file indentation amount"
+        }
+      }
+    }
   }
 }

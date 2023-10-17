@@ -4,3 +4,5 @@ export const resolvePoiniterToPath = (pointer: Pointer) => {
   const path = pointer.replace("#/", "");
   return path;
 };
+
+export * from "./get-user-settings";
